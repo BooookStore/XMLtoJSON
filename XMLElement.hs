@@ -20,11 +20,11 @@ instance Show Element where
 --     convert (Element c []) = show c
 --     convert (Element c xs) = show c ++ foldl (\acc x -> acc ++ show x) "" xs
 
--- createXMLElement :: String -> Element c
--- createXMLElement content = Element content []
+createXMLElement :: Name -> Content -> Element
+createXMLElement name content = Element name content []
 
--- putUpXMLElement :: String -> Element c -> Element c
--- putUpXMLElement ca child = Element ca [child]
+putUpXMLElement :: Element -> Element -> Element
+putUpXMLElement (Element name content xs) elem = Element name content (xs ++ [elem])
 
 -- insertXMLElement :: String -> Element c -> Element c
 -- insertXMLElement ca (Element cb xs) = Element cb (xs ++ [createXMLElement ca])
