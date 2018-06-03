@@ -11,6 +11,14 @@ instance Show Element where
     show (Element name content xs) = "<" ++ name ++ ">" ++ content ++ "\n\t" ++ print xs ++ "\n</" ++ name ++ ">"
         where print xs = foldl (\acc x -> acc ++ show x) "" xs
 
+-- Define manipulation for xml element
+class Manipulatable elem where
+    insert :: elem -> elem -> elem
+
+-- Instantiate Element to Manipulatable
+instance Manipulatable Element where
+    insert (Element name content xs) elem = Element name content (xs ++ [elem])
+
 -- -- Convert to String class
 -- class Printable c where
 --     convert :: c -> String
@@ -23,10 +31,6 @@ instance Show Element where
 -- create new xml element
 createXMLElement :: Name -> Content -> Element
 createXMLElement name content = Element name content []
-
--- insert xml element to child
-insertXMLElement :: Element -> Element -> Element
-insertXMLElement (Element name content xs) elem = Element name content (xs ++ [elem])
 
 -- insertXMLElement :: Element -> Element -> Element
 -- insertXMLElement (Element name content xs) elem =
