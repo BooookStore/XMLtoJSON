@@ -20,14 +20,16 @@ instance Show Element where
 --     convert (Element c []) = show c
 --     convert (Element c xs) = show c ++ foldl (\acc x -> acc ++ show x) "" xs
 
+-- create new xml element
 createXMLElement :: Name -> Content -> Element
 createXMLElement name content = Element name content []
 
-putUpXMLElement :: Element -> Element -> Element
-putUpXMLElement (Element name content xs) elem = Element name content (xs ++ [elem])
+-- insert xml element to child
+insertXMLElement :: Element -> Element -> Element
+insertXMLElement (Element name content xs) elem = Element name content (xs ++ [elem])
 
--- insertXMLElement :: String -> Element c -> Element c
--- insertXMLElement ca (Element cb xs) = Element cb (xs ++ [createXMLElement ca])
+-- insertXMLElement :: Element -> Element -> Element
+-- insertXMLElement (Element name content xs) elem =
 
 -- printContent :: Element c -> String
 -- printContent (Element c []) = "Element has " ++ c
